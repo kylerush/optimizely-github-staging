@@ -11,7 +11,8 @@
       "matches": [
         "https://github.com/optimizely/marketing-website/pull/*",
         "https://github.com/optimizely/marketing-website/edit/master/*",
-        "https://github.com/optimizely/marketing-website/blob/master/*"
+        "https://github.com/optimizely/marketing-website/blob/master/*",
+        "https://github.com/optimizely/marketing-website/"
       ],
       "css": ["showPreview.css"],
       "js": ["showPreview.js"]

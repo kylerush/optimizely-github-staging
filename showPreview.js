@@ -29,6 +29,8 @@
 
   injectWarning = function(){
 
+    console.log('inject warning running');
+
     var editURL,
         warningCont,
         warningDivCont,
@@ -42,6 +44,8 @@
     editURL = /^\/optimizely\/marketing\-website\/(edit|blob)\/master/;
 
     if(editURL.test(d.location.pathname)){
+
+      console.log('warning will be injeccted');
 
       warningCont = d.createDocumentFragment();
 
@@ -75,7 +79,7 @@
 
       }
 
-      if( githubContainer ){
+      if( githubContainer && !d.querySelector('#optly-master-error') ){
 
         insertAfter(githubContainer, warningCont);
 
@@ -98,6 +102,8 @@
   };
 
   injectWarning();
+
+  setInterval(injectWarning, 500);
 
   injectPreview = function(){
 
