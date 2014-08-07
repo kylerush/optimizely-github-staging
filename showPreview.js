@@ -111,7 +111,7 @@
 
         if( !document.querySelector('#optly-preview') ){
 
-          //branchName = d.querySelectorAll('.css-truncate-target')[2].innerHTML;
+          branchName = d.querySelectorAll('.css-truncate-target')[2].innerHTML;
 
           previewHTML = d.createDocumentFragment();
 
