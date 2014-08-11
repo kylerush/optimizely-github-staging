@@ -3,7 +3,6 @@
   "name": "Optimizely staging preview",
   "description": "Creates a link to staging preview in GitHub.",
   "version": "0.0.2",
-  "default_locale": "en",
   "author": "Kyle Rush",
   "browser_action":{
     "default_icon": "icon.png"
