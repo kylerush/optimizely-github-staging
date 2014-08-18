@@ -9,7 +9,8 @@
       aTag,
       spanTag,
       mergePullRequest,
-      prURL;
+      prURL,
+      injectPreviewInterval;
 
   d = document;
 
@@ -27,9 +28,11 @@
 
   prURL = /^\/optimizely\/marketing\-website\/pull\//;
 
+  pullsURL = /^\/optimizely\/marketing\-website\/pulls$/;
+
   injectWarning = function(){
 
-    console.log('inject warning running');
+    //console.log('inject warning running');
 
     var editURL,
         warningCont,
@@ -38,14 +41,19 @@
         warningHeader,
         warningMessage,
         githubContainer,
-        editLink,
-        interFaceCont;
+        editLinks,
+        interFaceCont,
+        i;
+
+    //editURL = /^\/optimizely\/marketing\-website\/(edit|blob)\/master/;
 
     editURL = /^\/optimizely\/marketing\-website\/(edit|blob)\/master/;
 
-    if(editURL.test(d.location.pathname)){
+    homeURL = /^\/optimizely\/marketing\-website$/;
 
-      console.log('warning will be injeccted');
+    if( editURL.test(d.location.pathname) || homeURL.test(d.location.pathname) ){
+
+      //console.log('warning will be injeccted');
 
       warningCont = d.createDocumentFragment();
 
@@ -61,27 +69,37 @@
 
       warningHeader = warningDivWrap.appendChild(d.createElement('h2'));
 
-      warningHeader.appendChild(d.createTextNode('STOP'));
+      warningHeader.appendChild(d.createTextNode('REMINDER'));
 
       warningMessage = warningDivWrap.appendChild(d.createElement('p'));
 
-      warningMessage.appendChild(d.createTextNode('You cannot make changes on the master branch. Please go back and create a new branch before making changes.'));
+      warningMessage.appendChild(d.createTextNode('You can view, but you cannot edit on the master branch. If you need to make changes, please create a new branch.'));
 
       //githubContainer = d.querySelector('#js-repo-pjax-container');
 
       githubContainer = d.querySelector('.pagehead.repohead.instapaper_ignore.readability-menu');
 
-      editLink = d.querySelector('.octicon-button.js-update-url-with-hash');
+      editLinks = d.querySelectorAll('.actions > a');
 
-      if(editLink){
+      if( editLinks.length > 0 ){
 
-        editLink.parentNode.removeChild(editLink);
+        for(i = 0; i < editLinks.length; i++){
+
+          editLinks[i].parentNode.removeChild(editLinks[i]);
+
+        }
 
       }
 
       if( githubContainer && !d.querySelector('#optly-master-error') ){
 
         insertAfter(githubContainer, warningCont);
+
+        //console.log('editing interface');
+
+      } else {
+
+        //console.log('not able to edit interface');
 
       }
 
@@ -107,35 +125,55 @@
 
   injectPreview = function(){
 
+    //console.log('inject preview running');
+
     if( prURL.test(document.location.pathname) ){
+
+      //console.log('on pr page');
 
         if( !document.querySelector('#optly-preview') ){
 
-          branchName = d.querySelectorAll('.css-truncate-target')[2].innerHTML;
+          //console.log('branch name: ' + branchName);
 
-          previewHTML = d.createDocumentFragment();
+          try{
 
-          aTag = previewHTML.appendChild(d.createElement('a'));
+            branchName = d.querySelectorAll('.css-truncate-target')[2].innerHTML;
 
-          spanTag = aTag.appendChild(d.createElement('span'));
+            //console.log('branch name: ' + branchName);
 
-          spanTag.setAttribute('class', 'octicon octicon-eye-watch');
+            previewHTML = d.createDocumentFragment();
 
-          aTag.setAttribute('href', 'http://optimizely-marketing-site-staging.s3-website-us-east-1.amazonaws.com/' + branchName + '/');
+            aTag = previewHTML.appendChild(d.createElement('a'));
 
-          aTag.setAttribute('class', 'button .octicon-arrow-right');
+            spanTag = aTag.appendChild(d.createElement('span'));
 
-          aTag.setAttribute('id', 'optly-preview');
+            spanTag.setAttribute('class', 'octicon octicon-eye-watch');
 
-          aTag.setAttribute('target', '_blank');
+            aTag.setAttribute('href', 'http://optimizely-marketing-site-staging.s3-website-us-east-1.amazonaws.com/' + branchName + '/');
 
-          aTag.appendChild(d.createTextNode(' Preview changes'));
+            aTag.setAttribute('class', 'button .octicon-arrow-right');
 
-          mergePullRequest = d.querySelector('.button.primary.merge-branch-action.js-details-target');
+            aTag.setAttribute('id', 'optly-preview');
 
-          insertAfter(mergePullRequest, previewHTML);
+            aTag.setAttribute('target', '_blank');
 
-          d.querySelector('.js-details-container .merge-branch-description').innerHTML = 'Note: It takes 3 minutes to create the preview.';
+            aTag.appendChild(d.createTextNode(' Preview changes'));
+
+            mergePullRequest = d.querySelector('.button.primary.merge-branch-action.js-details-target');
+
+            insertAfter(mergePullRequest, previewHTML);
+
+            d.querySelector('.js-details-container .merge-branch-description').innerHTML = 'Note: It takes 3 minutes to create the preview.';
+
+          } catch(err) {
+
+
+
+          }
+
+        } else {
+
+          clearInterval(injectPreviewInterval);
 
         }
 
@@ -145,11 +183,10 @@
 
   injectPreview();
 
-  if( prURL.test(d.location.pathname) ){
+  if( pullsURL.test(d.location.pathname) || prURL.test(d.location.pathname) ){
 
-    setInterval(injectPreview, 500);
+    injectPreviewInterval = setInterval(injectPreview, 500);
 
   }
-
 
 })();
