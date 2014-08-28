@@ -10,7 +10,8 @@
       spanTag,
       mergePullRequest,
       prURL,
-      injectPreviewInterval;
+      injectPreviewInterval,
+      buildSuccess;
 
   d = document;
 
@@ -125,15 +126,17 @@
 
   injectPreview = function(){
 
-    //console.log('inject preview running');
+    console.log('inject preview running');
 
     if( prURL.test(document.location.pathname) ){
 
-      //console.log('on pr page');
+      console.log('on pr page');
 
-        if( !document.querySelector('#optly-preview') ){
+        buildSuccess = d.querySelector('.branch-status.edit-comment-hide.status-success');
 
-          //console.log('branch name: ' + branchName);
+        if( !document.querySelector('#optly-preview') && buildSuccess ){
+
+          console.log('preview does not exist and build status is green');
 
           try{
 
