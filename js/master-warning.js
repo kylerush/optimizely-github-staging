@@ -1,45 +1,49 @@
 (function(w, d){
 
-  var reminderCont,
-      reminderDivCont,
-      reminderDivWrap,
-      reminderHeader,
-      reminderMessage,
-      githubContainer,
-      editLinks,
-      interFaceCont,
-      i;
+  w.getBranch(function(){
 
-  reminderCont = d.createDocumentFragment();
+    var reminderCont,
+        reminderDivCont,
+        reminderDivWrap,
+        reminderHeader,
+        reminderMessage,
+        githubContainer,
+        editLinks,
+        interFaceCont,
+        i;
 
-  reminderDivCont = reminderCont.appendChild(d.createElement('div'));
+    reminderCont = d.createDocumentFragment();
 
-  reminderDivCont.setAttribute('id', 'optly-master-error');
+    reminderDivCont = reminderCont.appendChild(d.createElement('div'));
 
-  reminderDivWrap = reminderDivCont.appendChild(d.createElement('div'));
+    reminderDivCont.setAttribute('id', 'optly-master-error');
 
-  reminderDivWrap.setAttribute('class', 'container');
+    reminderDivWrap = reminderDivCont.appendChild(d.createElement('div'));
 
-  reminderHeader = reminderDivWrap.appendChild(d.createElement('h2'));
+    reminderDivWrap.setAttribute('class', 'container');
 
-  reminderMessage = reminderDivWrap.appendChild(d.createElement('p'));
+    reminderHeader = reminderDivWrap.appendChild(d.createElement('h2'));
 
-  if(typeof window.branchName === 'string' && window.branchName === 'master'){
+    reminderMessage = reminderDivWrap.appendChild(d.createElement('p'));
 
-      reminderDivCont.setAttribute('class', 'flash-global flash-error');
+    if(typeof window.branchName === 'string' && window.branchName === 'master'){
 
-      reminderHeader.appendChild(d.createTextNode('WARNING'));
+        reminderDivCont.setAttribute('class', 'flash-global flash-error');
 
-      reminderMessage.appendChild(d.createTextNode('You can view, but you cannot edit on the master branch. If you need to make changes, please create a new branch.'));
+        reminderHeader.appendChild(d.createTextNode('WARNING'));
 
-      githubContainer = d.querySelector('.pagehead.repohead.instapaper_ignore.readability-menu');
+        reminderMessage.appendChild(d.createTextNode('You can view, but you cannot edit on the master branch. If you need to make changes, please create a new branch.'));
 
-      if( githubContainer && !d.querySelector('#optly-master-error') ){
+        githubContainer = d.querySelector('.pagehead.repohead.instapaper_ignore.readability-menu');
 
-        d.querySelector('div.site').insertBefore(reminderCont, githubContainer);
+        if( githubContainer && !d.querySelector('#optly-master-error') ){
 
-      }
-  
-  }
+          d.querySelector('div.site').insertBefore(reminderCont, githubContainer);
+
+        }
+    
+    }
+
+  });
 
 })(window, document);

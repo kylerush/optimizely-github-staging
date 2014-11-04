@@ -1,14 +1,40 @@
 (function(w, d){
 
-  if( d.querySelector('.js-select-button.css-truncate-target') ){
+  w.getBranch = function(callback){
 
-    w.branchName = d.querySelector('.js-select-button.css-truncate-target').innerHTML;
+    var interval = setInterval(function(){
 
-  } else if(d.querySelectorAll('span.current-branch span')[1]){
+      var branchName;
 
-    w.branchName = d.querySelectorAll('span.current-branch span')[1].innerHTML;
+      if( d.querySelector('.js-select-button.css-truncate-target') ){
 
-  }
+        branchName = d.querySelector('.js-select-button.css-truncate-target').innerHTML;
+
+      } else if(d.querySelectorAll('span.current-branch span')[1]){
+
+        branchName = d.querySelectorAll('span.current-branch span')[1].innerHTML;
+
+      }
+
+      if(branchName){
+
+        w.branchName = branchName;
+
+        if(typeof callback === 'function'){
+
+          callback(branchName);
+
+        }
+
+        clearInterval(interval);
+
+      }
+
+    }, 500);
+
+  };
+
+  w.getBranch();
 
   //alert('branchName: ' + branchName);
 
