@@ -21,6 +21,18 @@
         "https://github.com/optimizely/marketing-website/tree/master/*"
       ],
       "js": ["js/master-warning.js"]
+    },
+    {
+      "matches": [
+        "https://github.com/optimizely/marketing-website/pull/*"
+      ],
+      "js": ["js/pull-requests.js"],
+      "css": ["css/pull-requests.css"]
+    },{
+      "matches": [
+        "https://github.com/optimizely/marketing-website/blob/master/*"
+      ],
+      "js": ["js/master-blob.js", "js/master-warning.js"]
     }
   ]
 }

@@ -1,0 +1,5 @@
+#optly-preview {
+  float: right;
+  margin-left: 5px;
+}
+div.branch-action.branch-action-state-unstable #optly-preview {display: none;}

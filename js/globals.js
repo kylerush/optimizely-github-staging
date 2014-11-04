@@ -2,11 +2,17 @@
 
   if( d.querySelector('.js-select-button.css-truncate-target') ){
 
-    window.branchName = d.querySelector('.js-select-button.css-truncate-target').innerHTML;
+    w.branchName = d.querySelector('.js-select-button.css-truncate-target').innerHTML;
+
+  } else if(d.querySelectorAll('span.current-branch span')[1]){
+
+    w.branchName = d.querySelectorAll('span.current-branch span')[1].innerHTML;
 
   }
 
-  window.insertAfter = function(referenceNode, newNode) {
+  //alert('branchName: ' + branchName);
+
+  w.insertAfter = function(referenceNode, newNode) {
 
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 
