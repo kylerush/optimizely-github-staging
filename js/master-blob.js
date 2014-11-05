@@ -1,5 +1,7 @@
 (function(w, d){
 
+  var i;
+
   if(w.branchName === 'master'){
 
     var editLinks = d.querySelectorAll('div.actions > a');

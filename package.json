@@ -1,0 +1,27 @@
+{
+  "name": "optimizely-github-staging",
+  "version": "0.0.5",
+  "description": "Adds a preview button to Optimizely marketing website PR interface.",
+  "main": "index.js",
+  "dependencies": {
+    "grunt": "~0.4.5"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-watch": "^0.6.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kylerush/optimizely-github-staging.git"
+  },
+  "author": "Kyle Rush",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kylerush/optimizely-github-staging/issues"
+  },
+  "homepage": "https://github.com/kylerush/optimizely-github-staging"
+}

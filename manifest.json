@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Optimizely staging preview",
   "description": "Creates a link to staging preview in GitHub.",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "Kyle Rush",
   "browser_action":{
     "default_icon": "icon.png"
@@ -26,13 +26,19 @@
       "matches": [
         "https://github.com/optimizely/marketing-website/pull/*"
       ],
-      "js": ["js/pull-requests.js"],
+      "js": ["js/adjust-pr-interface.js", "js/pull-requests.js"],
       "css": ["css/pull-requests.css"]
     },{
       "matches": [
         "https://github.com/optimizely/marketing-website/blob/master/*"
       ],
       "js": ["js/master-blob.js", "js/master-warning.js"]
+    },{
+      "matches": [
+        "https://github.com/optimizely/marketing-website/pulls"
+      ],
+      "js": ["js/adjust-pr-interface.js", "js/pulls.js"],
+      "css": ["css/pull-requests.css"]
     }
   ]
 }
