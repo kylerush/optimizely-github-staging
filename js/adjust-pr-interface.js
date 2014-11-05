@@ -6,7 +6,7 @@
         aTag,
         spanTag,
         branchStatusDiv,
-        mergePullRequest,
+        previewButton,
         observer,
         branchStatus,
         updateBranchMessage,
@@ -20,7 +20,7 @@
 
     spanTag.setAttribute('class', 'octicon octicon-eye-watch');
 
-    aTag.setAttribute('href', 'http://optimizely-marketing-site-staging.s3-website-us-east-1.amazonaws.com/' + branchName + '/');
+    aTag.setAttribute('href', 'http://optimizely-marketing-site-staging.s3-website-us-east-1.amazonaws.com/' + w.branchName + '/');
 
     aTag.setAttribute('class', 'button .octicon-arrow-right');
 
@@ -32,9 +32,13 @@
 
     branchStatusDiv = d.querySelector('div.branch-action');
 
-    mergePullRequest = d.querySelector('.button.merge-branch-action.js-details-target');
+    previewButton = d.querySelector('a.button.desktop-app-action');
 
-    w.insertAfter(mergePullRequest, previewHTML);
+    if( !d.getElementById('optly-preview') ){
+
+      d.querySelector('div.merge-message').insertBefore(previewHTML, previewButton);
+
+    }
 
     branchStatus = d.querySelector('div.branch-status');
 
@@ -42,17 +46,21 @@
 
     updateBranchMessage = function(element){
 
-      if( element.classList.contains('status-pending') ){
+      if(element){
 
-        mergeBranchDescription.innerHTML = 'Your build is processing. The preview link will appear if your build passes. This usually takes a few minutes.';
+        if( element.classList.contains('status-pending') ){
 
-      } else if( element.classList.contains('status-failure') ) {
+          mergeBranchDescription.innerHTML = 'Your build is processing. The preview link will appear if your build passes. This usually takes a few minutes.';
 
-        mergeBranchDescription.innerHTML = 'There was a problem with your build. Please contact marketing eng.';
+        } else if( element.classList.contains('status-failure') ) {
 
-      } else if( element.classList.contains('status-success') ){
+          mergeBranchDescription.innerHTML = 'There was a problem with your build. Please contact marketing eng.';
 
-        mergeBranchDescription.innerHTML = 'Your preview is ready!';
+        } else if( element.classList.contains('status-success') ){
+
+          mergeBranchDescription.innerHTML = 'Your preview is ready!';
+
+        }
 
       }
 

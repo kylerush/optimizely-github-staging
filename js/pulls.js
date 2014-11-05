@@ -1,12 +1,18 @@
 (function(w, d){
 
-  var observer = new MutationObserver(function(mutations){
+  var observer = new MutationObserver(function(){
 
     w.getBranch(function(){
 
-      w.updatePRStatus();
+      try {
 
-      observer.disconnect();
+        w.updatePRStatus();
+
+      } catch(err) {
+
+        w.console.log('caught error: ' + err);
+
+      }
 
     });
 

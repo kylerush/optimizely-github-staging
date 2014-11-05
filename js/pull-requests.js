@@ -1,5 +1,5 @@
-(function(w, d){
+(function(w){
 
   w.getBranch(w.updatePRStatus);
 
-})(window, document);
+})(window);

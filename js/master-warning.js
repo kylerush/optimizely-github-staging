@@ -7,10 +7,7 @@
         reminderDivWrap,
         reminderHeader,
         reminderMessage,
-        githubContainer,
-        editLinks,
-        interFaceCont,
-        i;
+        githubContainer;
 
     reminderCont = d.createDocumentFragment();
 
@@ -41,7 +38,7 @@
           d.querySelector('div.site').insertBefore(reminderCont, githubContainer);
 
         }
-    
+
     }
 
   });
